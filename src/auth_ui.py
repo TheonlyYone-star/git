@@ -6,6 +6,7 @@ from tkinter import filedialog, messagebox
 from pathlib import Path
 from typing import Optional
 from auth_db import AuthDB
+from face_detection import FaceDetectionWindow
 
 
 class AuthApp:
@@ -304,6 +305,13 @@ class AuthApp:
             frame, text=f'身份证号：{user["id_card"]}',
             font=('Segoe UI', 11)
         ).pack(pady=(0, 10))
+
+        camera_button = tk.Button(
+            frame, text='启动摄像头人脸检测', width=18,
+            bg='#5cb85c', fg='white',
+            command=lambda: FaceDetectionWindow(self.root, phone, user["full_name"])
+        )
+        camera_button.pack(pady=12)
 
         tk.Button(
             frame, text='退出登录', width=18,
